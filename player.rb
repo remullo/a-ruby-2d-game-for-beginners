@@ -48,15 +48,17 @@ class Player
   end
 
   def move
-    @x += @vel_x
-    @y += @vel_y
     @vel_x *= 0.95
     @vel_y *= 0.95
-    if @y<0
-      @y = 0
-    elsif @y>480
-      @y=480
+    @x += @vel_x
+    @y += @vel_y
+
+    if @y<-40
+      @y = -40
+    elsif @y>380
+      @y=380
     end
+    
   end
 
   def draw
