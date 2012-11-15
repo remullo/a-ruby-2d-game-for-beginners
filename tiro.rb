@@ -4,7 +4,7 @@ class Tiro
     def initialize(window)
         @tela = window
         @x = @tela.player.x
-        @y = @tela.player.y
+        @y = @tela.player.y+80
         @labareda = Gosu::Image.new(@tela, "img/flame.png", true)
     end
    

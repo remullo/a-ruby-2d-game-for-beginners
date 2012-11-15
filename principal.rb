@@ -8,6 +8,7 @@ require_relative 'clock'
 require 'objects/Fogo.rb'
 require 'bicho'
 require 'menu'
+require 'bicho2'
 
 
 window = GameWindow.new

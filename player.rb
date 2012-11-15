@@ -1,17 +1,22 @@
 require 'player2'
 
 class Player
-  attr_accessor :player, :image, :score, :pontos, :morto, :x, :y, :estagio
+  attr_accessor :player, :image, :score, :pontos, :morto, :x, :y, :estagio, :imgset
   def initialize(window)
-  #  @image = Gosu::Image::load_tiles(window, "img/pidgeottobw.png", 2.3, 3.0, 3)
+    # @image = Gosu::Image::load_tiles(window, "img/pidgeottobw.png", 2.3, 3.0, 3)
     @janela =  window
-    @image = Gosu::Image.new(window, "img/players/player.png", false)
+    @image = Gosu::Image.new(window, "img/players/playertiler.png", false)
+    @imgset = Gosu::Image::load_tiles(@janela,@image, 180,170, true)
     @morto= Gosu::Image.new(window, "img/hitted.png", true)
     @x = @y = @vel_x = @vel_y = @angle = 0.0
     @score = 3
     @pontos = 0
     @acertado = false
     @estagio = 1
+
+    $i = 0
+    $ind = 0
+
   end
 
   def warp(x, y)
@@ -28,7 +33,7 @@ class Player
   def turn_right
     @x += 4.5
     if @x > 640
-      @x = 600
+      @x = 640
     end
   end
 
@@ -59,7 +64,21 @@ class Player
     if @acertado
     @morto.draw(@x, @y, 4)
     else
-    @image.draw_rot(@x,@y,1, @angle)
+    # @image.draw_rot(@x,@y,1, @angle)
+
+      if $i < 7 then
+      $i+=1
+      end
+      if $i == 7 then
+      $ind+=1
+      $i = 0
+      end
+      if $ind >= @imgset.size then
+      $ind = -4
+      end
+    @imgset[$ind].draw(@x, @y, 3)
+    #@icon.draw(@x, @y, 3)
+
     end
   end
 

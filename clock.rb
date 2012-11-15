@@ -9,6 +9,7 @@ class Timer
   
   def atual
     @bichos << Enemy.new(@window) if mais_bicho?
+    @araras << Arara.new(@window) if mais_bicho?
   end
   
   def segundos
