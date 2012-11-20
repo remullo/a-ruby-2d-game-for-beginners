@@ -3,7 +3,7 @@ class Timer
     @bichos = bichos
     @window = window
     @inicio = Time.now
-    @cada_n_seg = 1
+    @cada_n_seg = 3
     @ult_seg_lembrado = 0
   end
   

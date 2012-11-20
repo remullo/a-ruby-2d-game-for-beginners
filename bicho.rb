@@ -16,8 +16,6 @@ class Enemy
  
   end
 
-
-
   def mover(tiro)
     @x = @x - @velx
     if @y > @tela.player.y
@@ -50,10 +48,43 @@ class Enemy
            @tela.player.estagio = 4
      end 
          
-     if @tela.player.pontos >1000
+     if @tela.player.pontos > 1000 and @tela.player.pontos < 1400
            @ace = 0.6
            @tela.player.estagio = 5
       end
+      
+      if @tela.player.pontos > 1400 and @tela.player.pontos < 1600
+        @ace = 0.8
+        @tela.player.estagio = 6
+      end
+      
+      if @tela.player.pontos > 1600 and @tela.player.pontos < 1800
+        @ace = 1.0
+        @tela.player.estagio = 7
+      end
+      
+      if @tela.player.pontos > 1800 and @tela.player.pontos < 2000
+        @ace = 1.2
+        @tela.player.estagio = 8
+      end
+       if @tela.player.pontos > 2000 and @tela.player.pontos< 2200
+        @ace = 1.4
+        @tela.player.estagio = 9
+      end
+       if @tela.player.pontos > 2200 and @tela.player.pontos< 2400
+        @ace = 1.6
+        @tela.player.estagio = 10
+      end
+       if @tela.player.pontos > 2400 and @tela.player.pontos< 2600
+        @ace = 1.8
+        @tela.player.estagio = 11
+      end
+       if @tela.player.pontos > 2600
+        @ace = 2.0
+        @tela.player.estagio = 12
+      end
+
+      
   #------------------------------------------------------------------------------------#    
   if @tela.player.pontos
       

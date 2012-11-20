@@ -10,7 +10,7 @@ class Arara
     @ace = 0.1
     @velx = 2
     @vely = 2
-    @x = 660
+    @x = 680
     @speed = @x - 10*4
     
  

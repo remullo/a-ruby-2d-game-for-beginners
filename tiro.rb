@@ -13,7 +13,7 @@ class Tiro
     def update
       @x = @x + 10
        @tela.bichos.each {|bicho| bicho.levou?(self)}
-      if @x > 640
+      if @x >= 400 + @tela.player.x
         morrer
       end
     end

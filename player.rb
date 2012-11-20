@@ -79,8 +79,6 @@ class Player
       $ind = -4
       end
     @imgset[$ind].draw(@x, @y, 3)
-    #@icon.draw(@x, @y, 3)
-
     end
   end
 
@@ -95,7 +93,8 @@ class Player
   end
 
   def reset_position
-    @x = rand(@janela.width)
+    @y = rand(@janela.height)
+    @x = 50
   end
 
 end

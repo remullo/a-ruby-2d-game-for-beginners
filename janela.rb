@@ -13,26 +13,26 @@ require_relative 'clock'
 
 #----------- Janela de entrada/abertura --------------------------------
 class GameWindow < Gosu::Window
-  attr_reader :player, :player2, :bichos, :menu, :fonte, :fonte2, :clock, :pontos, :tiros, :atirar, :background_image, :estagio, :telainicio, :bgmenu
+  attr_reader  :musica, :player, :player2, :bgtiles, :bichos, :menu, :fonte, :fonte2, :clock, :pontos, :tiros, :atirar, :background_image, :estagio, :telainicio, :bgmenu
   def initialize
     
     super 640,480, false
+    tileable = true
     @tempoTiro = 0
     self.caption = "Plume Brothers - - v 1.0"
-    @background_image = Gosu::Image.new(self, "img/sp.png", true)
-    @bgmenu = Gosu::Image.new(self, "img/menu/bg.jpg", true)
+    @background_image = Gosu::Image.new(self, "img/flamesky.jpg", true)
     @bichos = 2.times.map {Enemy.new(self)}
     @clock = Timer.new(self, @bichos)
     @tiros = []
     @atirar = true
     @telainicio = true
     
-
+   
     @fogo = Fogo.new(self)
     @fogo.surgir(350,400)
 
     @player = Player.new(self)
-    @player.warp(320, 240)
+    @player.warp(50, 100)
     @point = @player.pontos
 
     @player2 = Player2.new(self)
@@ -40,22 +40,26 @@ class GameWindow < Gosu::Window
    
 
     @rodando = true
-
+    @iniciar = false
     @fonte = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @fonte2 = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @fonte3 = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @estagio = Gosu::Font.new(self, Gosu::default_font_name, 20)
-
-  end
+    end
 
   def update
-
+  if button_down? Gosu::KbX then
+    @iniciar = true
+  end
     if @rodando #Confere se o jogo estará rodando ou não
       if @player.hit_by? @bichos then 
         @rodando = false
        
       else
+        if @iniciar
+        
         rungame
+        end
       end
     end
     
@@ -67,7 +71,9 @@ class GameWindow < Gosu::Window
     
     #-------------------------------FUNÇÃO DO PLACAR FINAL------------------------#
      if (@player.score == 0) 
+       @textofase
           puts "O seu Score foi de: #{@player.pontos} pontos!!"
+          puts "Estagio maximo atingido: #{@player.estagio}!!"
           close
      end
   end
@@ -75,12 +81,10 @@ class GameWindow < Gosu::Window
   def rungame
     bichovivo.each {|bicho| bicho.mover(@bicho)}
     
-    
     @player.move
         @clock.atual
     #@player2.move
 
-    
     #---------------------------------------------------CONTROLES PLAYER 1-------------------------------------#
 
     if button_down? Gosu::KbLeft or button_down? Gosu::GpLeft then
@@ -141,12 +145,14 @@ class GameWindow < Gosu::Window
     @fonte.draw("Lifes P1: #{@player.score} miserable lifes", 10, 29, 3.0, 1.0, 1.0, 0xF3FF3323)
     @estagio.draw("Estagio #{@player.estagio} ", 10, 70, 3.0, 1.0, 1.0, 0xffffffff)
     @fonte.draw("Pontos P1: #{@player.pontos} pontos", 10, 50, 3.0, 1.0, 1.0, 0xffffffff)
-    @bgmenu.draw(0,0,0)
-    @fogo.draw
+   # @bgmenu.draw(0,0,0)
+  #  @fogo.draw
     bichovivo.each {|bicho| bicho.draw}
    
-
     @background_image.draw(0, 0, 0);
+    
+
+    
   end
   
   def bichovivo
