@@ -1,10 +1,12 @@
 require 'player'
 
 class Enemy
-  attr_reader :x, :y, :tela, :mons, :vivo, :pl, :speed, :player
+  attr_reader :x, :y, :tela, :mons, :mons2, :vivo, :pl, :speed, :player, :monstro
   def initialize(window)
     @tela = window
-    @mons = Gosu::Image.new(@tela, 'img/monster.png', true)
+   
+	@mons = Gosu::Image.new(@tela, 'img/monster.png', true) 
+	#@mons2 = Gosu::Image.new(@tela, 'img/monstro2.png', true) 
     @vivo = true
     @y = rand(@tela.height) - @mons.height
     @ace = 0.1
@@ -12,11 +14,33 @@ class Enemy
     @vely = 2
     @x = 660
     @speed = @x - 10*4
-    
- 
+	   @scream = Gosu::Sample.new(@tela, "mus/smp/crow.aif")
+      @screamsound = @scream.play(vol = 1, speed = 1, looping = false)
+  $s = 0
+  $som = 0
   end
 
   def mover(tiro)
+    
+    
+    if $s < 1000 then
+      $s+=1
+      end
+      if $s == 1000 then
+      $som+=1
+      $s = 0
+      end
+      if $som >= 1000 then
+      $som = 0
+      end
+    @screamsound
+   
+    
+    
+    
+    
+    
+  
     @x = @x - @velx
     if @y > @tela.player.y
       @y -= @vely
@@ -108,8 +132,11 @@ class Enemy
     end
   end
 
+
   def draw
+	 
     @mons.draw(@x, @y, 3)
+	 
   end
 
   def levou?(tiro)

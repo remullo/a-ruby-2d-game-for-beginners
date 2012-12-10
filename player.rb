@@ -68,10 +68,10 @@ class Player
     else
     # @image.draw_rot(@x,@y,1, @angle)
 
-      if $i < 7 then
+      if $i < 6 then
       $i+=1
       end
-      if $i == 7 then
+      if $i == 6 then
       $ind+=1
       $i = 0
       end
